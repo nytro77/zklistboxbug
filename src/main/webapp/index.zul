@@ -1,0 +1,37 @@
+<zk>
+
+	<zscript><![CDATA[
+		class MyVM {
+	
+			public List getItems() {
+	    		List retval = new ArrayList();
+	    		retval.add("a");
+				return retval;
+			}	
+		}
+	]]></zscript>
+
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('MyVM')">
+
+		<vbox>
+		
+			<!-- Setting vflex=1 will cure the error unless label of the listfooter is also removed -->
+			<listbox height="100px" model="@bind(vm.items)">
+
+				<template name="model" var="item">
+					<listitem visible="false">
+						<listcell label="@load(item)" />
+					</listitem>
+				</template>
+
+				<listfoot>					
+					<listfooter label="Hello" />
+				</listfoot>
+
+			</listbox>
+		</vbox>
+
+	</window>
+</zk>
+
